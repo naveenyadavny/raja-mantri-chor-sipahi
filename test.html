@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Test</title>
+</head>
+<body>
+    <h1>Role Assignment Test</h1>
+    <div id="testResults"></div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const results = document.getElementById('testResults');
+        
+        socket.on('connect', () => {
+            results.innerHTML += '<p>✅ Connected to server</p>';
+            
+            // Test role data mapping
+            const testRoles = ['raja', 'mantri', 'chor', 'sipahi', 'rani'];
+            results.innerHTML += '<h3>Testing Role Data:</h3>';
+            
+            testRoles.forEach(role => {
+                const roleData = getRoleData(role);
+                results.innerHTML += `<p>${role}: ${roleData.name} (${roleData.icon})</p>`;
+            });
+        });
+        
+        socket.on('gameStarted', (data) => {
+            results.innerHTML += `<h3>Game Started:</h3>`;
+            results.innerHTML += `<p>Player Role: ${data.playerRole}</p>`;
+            results.innerHTML += `<p>Players: ${JSON.stringify(data.players, null, 2)}</p>`;
+        });
+        
+        function getRoleData(role) {
+            const roleData = {
+                'raja': {
+                    name: 'Raja (King)',
+                    icon: 'fa-crown',
+                    color: '#FFD700',
+                    description: 'You are the King! Your goal is to identify the Chor (thief) and maintain order in your kingdom.'
+                },
+                'mantri': {
+                    name: 'Mantri (Minister)',
+                    icon: 'fa-user-tie',
+                    color: '#4CAF50',
+                    description: 'You are the Minister! Help identify the Chor while maintaining your cover.'
+                },
+                'chor': {
+                    name: 'Chor (Thief)',
+                    icon: 'fa-mask',
+                    color: '#f44336',
+                    description: 'You are the Thief! Avoid being identified by other players.'
+                },
+                'sipahi': {
+                    name: 'Sipahi (Guard)',
+                    icon: 'fa-shield-alt',
+                    color: '#2196F3',
+                    description: 'You are the Guard! Protect the kingdom and help identify threats.'
+                },
+                'rani': {
+                    name: 'Rani (Queen)',
+                    icon: 'fa-gem',
+                    color: '#9C27B0',
+                    description: 'You are the Queen! Support the King and maintain royal order.'
+                }
+            };
+            return roleData[role] || { name: 'Unknown', icon: 'fa-question', color: '#666', description: 'Unknown role' };
+        }
+        
+        // Test creating a room
+        setTimeout(() => {
+            results.innerHTML += '<h3>Testing Room Creation:</h3>';
+            socket.emit('createRoom', { maxPlayers: 4, totalRounds: 3 });
+        }, 2000);
+    </script>
+</body>
+</html>

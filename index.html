@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raja Mantri Chori Sipahi - Multiplayer Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen active">
+            <!-- Top Banner Ad -->
+            <div class="ad-space ad-banner-top">
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad"></i>
+                    <span>Advertisement Space</span>
+                </div>
+            </div>
+            
+            <div class="header">
+                <h1><i class="fas fa-crown"></i> Raja Mantri Chori Sipahi</h1>
+                <p class="subtitle">Classic Indian Multiplayer Card Game</p>
+            </div>
+            
+            <div class="menu-options">
+                <button id="createRoomBtn" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i> Create Room
+                </button>
+                <button id="joinRoomBtn" class="btn btn-secondary">
+                    <i class="fas fa-sign-in-alt"></i> Join Room
+                </button>
+                <button id="rulesBtn" class="btn btn-info">
+                    <i class="fas fa-book"></i> Game Rules
+                </button>
+            </div>
+            
+            <div class="game-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-users"></i> Players</h3>
+                    <p>3-5 players can play together</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-crown"></i> Roles</h3>
+                    <p>Mantri, Chor, Sipahi (3P) + Raja, Rani (4-5P)</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-globe"></i> Online</h3>
+                    <p>Real-time multiplayer experience</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Room Screen -->
+        <div id="createRoom" class="screen">
+            <div class="header">
+                <h2><i class="fas fa-plus-circle"></i> Create New Room</h2>
+                <button id="backToMenu" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="playerName">Your Name</label>
+                    <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+                </div>
+                
+                <div class="form-group">
+                    <label for="roomSize">Number of Players</label>
+                    <select id="roomSize">
+                        <option value="3">3 Players (Mantri, Chor, Sipahi)</option>
+                        <option value="4">4 Players (Raja, Mantri, Chor, Sipahi)</option>
+                        <option value="5">5 Players (Raja, Mantri, Chor, Sipahi, Rani)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="totalRounds">Number of Rounds</label>
+                    <select id="totalRounds">
+                        <option value="1">1 Round</option>
+                        <option value="3">3 Rounds</option>
+                        <option value="5">5 Rounds</option>
+                        <option value="7">7 Rounds</option>
+                        <option value="10">10 Rounds</option>
+                        <option value="15">15 Rounds</option>
+                    </select>
+                </div>
+                
+                <button id="createRoomConfirm" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Create Room
+                </button>
+            </div>
+        </div>
+
+        <!-- Join Room Screen -->
+        <div id="joinRoom" class="screen">
+            <div class="header">
+                <h2><i class="fas fa-sign-in-alt"></i> Join Room</h2>
+                <button id="backToMenu2" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="joinPlayerName">Your Name</label>
+                    <input type="text" id="joinPlayerName" placeholder="Enter your name" maxlength="20">
+                </div>
+                
+                <div class="form-group">
+                    <label for="roomCode">Room Code</label>
+                    <input type="text" id="roomCode" placeholder="Enter room code" maxlength="6">
+                </div>
+                
+                <button id="joinRoomConfirm" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Join Room
+                </button>
+            </div>
+        </div>
+
+        <!-- Waiting Room Screen -->
+        <div id="waitingRoom" class="screen">
+            <!-- Sidebar Ad -->
+            <div class="ad-space ad-sidebar">
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad"></i>
+                    <span>Ad Space</span>
+                </div>
+            </div>
+            
+            <div class="header">
+                <h2><i class="fas fa-clock"></i> Waiting Room</h2>
+                <div class="room-info">
+                    <span class="room-code">Room: <span id="currentRoomCode"></span></span>
+                    <button id="copyRoomCode" class="btn btn-small">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            
+            <div class="players-list">
+                <h3>Players (<span id="playerCount">0</span>/<span id="maxPlayers">0</span>)</h3>
+                <div class="room-details">
+                    <p><strong>Rounds:</strong> <span id="totalRoundsDisplay">0</span></p>
+                </div>
+                <div id="playersContainer" class="players-container">
+                    <!-- Players will be added here -->
+                </div>
+            </div>
+            
+            <div class="player-names-section" id="playerNamesSection" style="display: none;">
+                <h3><i class="fas fa-edit"></i> Enter Player Names</h3>
+                <div id="playerNameInputs"></div>
+                <button id="confirmNames" class="btn btn-success" style="display: none;">
+                    <i class="fas fa-check"></i> Confirm Names & Start Game
+                </button>
+            </div>
+            
+            <!-- Host Controls (only visible to host) -->
+            <div id="hostControls" class="host-controls" style="display: none;">
+                <h3><i class="fas fa-cog"></i> Host Settings</h3>
+                <div class="host-settings">
+                    <div class="form-group">
+                        <label for="waitingMaxPlayers">Max Players</label>
+                        <select id="waitingMaxPlayers">
+                            <option value="3">3 Players</option>
+                            <option value="4">4 Players</option>
+                            <option value="5">5 Players</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="waitingRounds">Rounds</label>
+                        <select id="waitingRounds">
+                            <option value="1">1 Round</option>
+                            <option value="3">3 Rounds</option>
+                            <option value="5">5 Rounds</option>
+                            <option value="7">7 Rounds</option>
+                            <option value="10">10 Rounds</option>
+                            <option value="15">15 Rounds</option>
+                        </select>
+                    </div>
+                    
+                    <button id="updateSettingsBtn" class="btn btn-warning">
+                        <i class="fas fa-save"></i> Update Settings
+                    </button>
+                </div>
+            </div>
+            
+            <div class="waiting-actions">
+                <button id="startGameBtn" class="btn btn-primary" disabled>
+                    <i class="fas fa-play"></i> Start Game
+                </button>
+                <button id="leaveRoomBtn" class="btn btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> Leave Room
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <!-- Bottom Banner Ad -->
+            <div class="ad-space ad-banner-bottom">
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad"></i>
+                    <span>Advertisement Space</span>
+                </div>
+            </div>
+            
+            <div class="game-header">
+                <div class="game-info">
+                    <span class="room-code">Room: <span id="gameRoomCode"></span></span>
+                    <span class="player-count">Players: <span id="gamePlayerCount"></span></span>
+                    <span class="round-info">Round: <span id="currentRound">1</span>/<span id="gameTotalRounds">0</span></span>
+                </div>
+                <button id="leaveGameBtn" class="btn btn-danger btn-small">
+                    <i class="fas fa-sign-out-alt"></i> Leave
+                </button>
+            </div>
+            
+            <div class="game-content">
+                <div class="role-section">
+                    <div class="role-card">
+                        <div class="role-icon">
+                            <i id="roleIcon" class="fas fa-user"></i>
+                        </div>
+                        <div class="role-info">
+                            <h3 id="playerRole">Your Role</h3>
+                            <p id="roleDescription">Role description will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-status">
+                    <div class="status-card">
+                        <h4>Game Status</h4>
+                        <p id="gameStatus">Waiting for game to start...</p>
+                    </div>
+                </div>
+                
+                <div class="players-section">
+                    <h4>Players</h4>
+                    <div id="gamePlayersContainer" class="game-players">
+                        <!-- Game players will be shown here -->
+                    </div>
+                </div>
+                
+                <div class="game-actions">
+                    <button id="revealRoleBtn" class="btn btn-warning" style="display: none;">
+                        <i class="fas fa-eye"></i> Reveal Role
+                    </button>
+                    <button id="showSlipBtn" class="btn btn-info" style="display: none;">
+                        <i class="fas fa-id-card"></i> Show My Slip
+                    </button>
+                    <button id="mantriGuessBtn" class="btn btn-primary" style="display: none;">
+                        <i class="fas fa-search"></i> Guess the Chor
+                    </button>
+                    <button id="rajaDecisionBtn" class="btn btn-success" style="display: none;">
+                        <i class="fas fa-gavel"></i> Make Decision
+                    </button>
+                    <button id="nextRoundBtn" class="btn btn-success" style="display: none;">
+                        <i class="fas fa-forward"></i> Start Next Round
+                    </button>
+                    <button id="endGameBtn" class="btn btn-danger" style="display: none;">
+                        <i class="fas fa-flag-checkered"></i> End Game
+                    </button>
+                </div>
+                
+                <!-- Chat Section -->
+                <div class="chat-section">
+                    <div class="chat-header">
+                        <h4><i class="fas fa-comments"></i> Chat</h4>
+                        <button id="toggleChatBtn" class="btn btn-small btn-secondary">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="chat-container" id="chatContainer">
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Chat messages will appear here -->
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chatInput" placeholder="Type your message..." maxlength="200">
+                            <button id="sendChatBtn" class="btn btn-primary btn-small">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mantri-guessing-section" id="mantriGuessingSection" style="display: none;">
+                    <h4><i class="fas fa-search"></i> Mantri's Turn - Guess the Chor</h4>
+                    <p>Select who you think is the Chor:</p>
+                    <div id="playerSelectionList" class="player-selection-list">
+                        <!-- Player selection buttons will be added here -->
+                    </div>
+                    <div class="mantri-submit-section" style="margin-top: 15px;">
+                        <button id="submitMantriGuessBtn" class="btn btn-primary" style="display: none;">
+                            <i class="fas fa-paper-plane"></i> Submit Guess
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="raja-decision-section" id="rajaDecisionSection" style="display: none;">
+                    <h4><i class="fas fa-gavel"></i> Raja's Decision</h4>
+                    <div class="decision-info">
+                        <p><strong>Mantri:</strong> <span id="mantriName"></span></p>
+                        <p><strong>Guessed Chor:</strong> <span id="guessedChorName"></span></p>
+                        <p>Was the Mantri's guess correct?</p>
+                    </div>
+                    <div class="decision-buttons">
+                        <button id="correctGuessBtn" class="btn btn-success">
+                            <i class="fas fa-check"></i> Correct Guess
+                        </button>
+                        <button id="wrongGuessBtn" class="btn btn-danger">
+                            <i class="fas fa-times"></i> Wrong Guess
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="round-results" id="roundResults" style="display: none;">
+                    <h4><i class="fas fa-trophy"></i> Round Results</h4>
+                    <div id="roundScores"></div>
+                </div>
+                
+                <div class="final-results" id="finalResults" style="display: none;">
+                    <h4><i class="fas fa-crown"></i> Final Scores</h4>
+                    <div id="finalScores"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules Screen -->
+        <div id="rulesScreen" class="screen">
+            <div class="header">
+                <h2><i class="fas fa-book"></i> Game Rules</h2>
+                <button id="backToMenu3" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+            <div class="rules-content">
+                <div class="rule-section">
+                    <h3><i class="fas fa-crown"></i> Roles & Hierarchy</h3>
+                    <div class="role-hierarchy">
+                        <div class="hierarchy-item">
+                            <span class="rank">1st</span>
+                            <span class="role">Raja (King)</span>
+                            <span class="description">Highest authority, can make decisions</span>
+                        </div>
+                        <div class="hierarchy-item">
+                            <span class="rank">2nd</span>
+                            <span class="role">Mantri (Minister)</span>
+                            <span class="description">Advisor to the king, second in command</span>
+                        </div>
+                        <div class="hierarchy-item">
+                            <span class="rank">3rd</span>
+                            <span class="role">Chor (Thief)</span>
+                            <span class="description">Steals from others, tries to avoid detection</span>
+                        </div>
+                        <div class="hierarchy-item">
+                            <span class="rank">4th</span>
+                            <span class="role">Sipahi (Soldier)</span>
+                            <span class="description">Protects the kingdom, catches thieves</span>
+                        </div>
+                        <div class="hierarchy-item">
+                            <span class="rank">5th</span>
+                            <span class="role">Rani (Queen)</span>
+                            <span class="description">Royal consort, has special powers</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-section">
+                    <h3><i class="fas fa-play"></i> How to Play</h3>
+                    <ol>
+                        <li>Each player gets a secret role card</li>
+                        <li>Players interact and try to guess others' roles</li>
+                        <li>Raja (in 4-5 players) tries to identify the Chor</li>
+                        <li>Chor tries to avoid detection</li>
+                        <li>Mantri helps identify the Chor</li>
+                        <li>Sipahi protects and investigates</li>
+                        <li>Rani (in 5-player games) has special abilities</li>
+                    </ol>
+                </div>
+                
+                <div class="rule-section">
+                    <h3><i class="fas fa-trophy"></i> Winning Conditions</h3>
+                    <ul>
+                        <li><strong>Raja:</strong> Correctly identify the Chor</li>
+                        <li><strong>Mantri:</strong> Help identify the Chor</li>
+                        <li><strong>Chor:</strong> Avoid being identified</li>
+                        <li><strong>Sipahi:</strong> Catch the Chor</li>
+                        <li><strong>Rani:</strong> Survive and help the kingdom</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Play Again Screen -->
+        <div id="playAgainScreen" class="screen">
+            <div class="container">
+                <div class="card">
+                    <h2><i class="fas fa-redo"></i> Play Again</h2>
+                    
+                    <div class="play-again-section">
+                        <h3>Current Players</h3>
+                        <div id="currentPlayersList" class="players-list">
+                            <!-- Current players will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="play-again-section">
+                        <h3>Game Settings</h3>
+                        <div class="form-group">
+                            <label for="playAgainRounds">Number of Rounds</label>
+                            <select id="playAgainRounds">
+                                <option value="1">1 Round</option>
+                                <option value="3">3 Rounds</option>
+                                <option value="5">5 Rounds</option>
+                                <option value="7">7 Rounds</option>
+                                <option value="10">10 Rounds</option>
+                                <option value="15">15 Rounds</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="playAgainMaxPlayers">Max Players</label>
+                            <select id="playAgainMaxPlayers">
+                                <option value="3">3 Players</option>
+                                <option value="4">4 Players</option>
+                                <option value="5">5 Players</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="play-again-section">
+                        <h3>Room Information</h3>
+                        <div class="room-info">
+                            <div class="form-group">
+                                <label>Room Code</label>
+                                <div class="room-code-display">
+                                    <span id="playAgainRoomCode" class="room-code-text">ABC123</span>
+                                    <button id="copyPlayAgainRoomCode" class="btn btn-secondary">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <p class="room-code-help">Share this code with new players to join the game</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="play-again-actions">
+                        <button id="startNewGameBtn" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Start New Game
+                        </button>
+                        <button id="backToMenuBtn" class="btn btn-secondary">
+                            <i class="fas fa-home"></i> Back to Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connection Status -->
+        <div id="connectionStatus" class="connection-status">
+            <i class="fas fa-wifi"></i>
+            <span id="connectionText">Connecting...</span>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+
+        <!-- Terms of Service Modal -->
+        <div id="termsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-file-contract"></i> Terms of Service</h2>
+                    <button class="close-btn" onclick="closeTermsModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By using Raja Mantri Chor Sipahi, you agree to be bound by these Terms of Service.</p>
+                    
+                    <h3>2. Game Rules</h3>
+                    <p>Players must:</p>
+                    <ul>
+                        <li>Play fairly and honestly</li>
+                        <li>Respect other players</li>
+                        <li>Not attempt to cheat or exploit the game</li>
+                        <li>Not use offensive language or behavior</li>
+                    </ul>
+                    
+                    <h3>3. Prohibited Activities</h3>
+                    <p>You may not:</p>
+                    <ul>
+                        <li>Attempt to hack or reverse engineer the game</li>
+                        <li>Use automated tools or bots</li>
+                        <li>Share inappropriate content</li>
+                        <li>Violate any applicable laws</li>
+                    </ul>
+                    
+                    <h3>4. Account Termination</h3>
+                    <p>We reserve the right to terminate accounts for violations of these terms.</p>
+                    
+                    <h3>5. Limitation of Liability</h3>
+                    <p>This game is provided "as is" without warranties of any kind.</p>
+                    
+                    <h3>6. Changes to Terms</h3>
+                    <p>We may update these terms at any time. Continued use constitutes acceptance.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="closeTermsModal()">I Understand</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Policy Modal -->
+        <div id="privacyModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
+                    <button class="close-btn" onclick="closePrivacyModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h3>1. Information We Collect</h3>
+                    <p>We collect minimal information:</p>
+                    <ul>
+                        <li><strong>Player Names:</strong> Used for game identification</li>
+                        <li><strong>Game Statistics:</strong> Scores and performance data</li>
+                        <li><strong>Technical Logs:</strong> For debugging and improvement</li>
+                        <li><strong>Chat Messages:</strong> Game communication only</li>
+                    </ul>
+                    
+                    <h3>2. How We Use Information</h3>
+                    <p>We use collected information to:</p>
+                    <ul>
+                        <li>Provide and improve game services</li>
+                        <li>Ensure fair play and security</li>
+                        <li>Debug technical issues</li>
+                        <li>Generate anonymous usage statistics</li>
+                    </ul>
+                    
+                    <h3>3. Information Sharing</h3>
+                    <p>We do NOT:</p>
+                    <ul>
+                        <li>Sell your personal information</li>
+                        <li>Share data with third parties</li>
+                        <li>Use data for advertising</li>
+                        <li>Track you across other websites</li>
+                    </ul>
+                    
+                    <h3>4. Data Security</h3>
+                    <p>We implement appropriate security measures to protect your information.</p>
+                    
+                    <h3>5. Data Retention</h3>
+                    <p>We retain data only as long as necessary for game functionality.</p>
+                    
+                    <h3>6. Your Rights</h3>
+                    <p>You have the right to request data deletion or modification.</p>
+                    
+                    <h3>7. Contact Us</h3>
+                    <p>For privacy concerns, contact us through the game support.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="closePrivacyModal()">I Understand</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Raja Mantri Chor Sipahi Game. All rights reserved.</p>
+                <p>Raja Mantri Chor Sipahi is a trademark of the game developers.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showTermsOfService()">Terms of Service</a>
+                    <span>|</span>
+                    <a href="#" onclick="showPrivacyPolicy()">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="ad-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

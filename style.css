@@ -1,0 +1,2229 @@
+/*
+ * Copyright (c) 2024 Raja Mantri Chor Sipahi Game
+ * All rights reserved.
+ * 
+ * This software is proprietary and confidential.
+ * Unauthorized copying, distribution, or modification is prohibited.
+ * 
+ * Raja Mantri Chor Sipahi - Game Styling
+ * Developed with CSS3, responsive design
+ */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #FFC107, #FF8F00);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: white;
+}
+
+.btn-back {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Main Menu Styles */
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto 40px;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.info-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.info-card h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.info-card p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+}
+
+/* Form Styles */
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+}
+
+/* Waiting Room Styles */
+.room-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.room-code {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.players-list {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.players-list h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.players-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-item {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.player-item.is-host {
+    border-color: #4CAF50;
+    background: rgba(76,175,80,0.1);
+}
+
+.player-item.is-you {
+    border-color: #2196F3;
+    background: rgba(33,150,243,0.1);
+}
+
+.player-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.player-name {
+    color: #fff;
+    font-weight: 600;
+    flex: 1;
+}
+
+.player-status {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+}
+
+.waiting-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Game Screen Styles */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 15px 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.game-info {
+    display: flex;
+    gap: 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.game-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.role-section {
+    grid-column: 1 / -1;
+}
+
+.role-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 20px;
+}
+
+.role-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #333;
+}
+
+.role-info h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.role-info p {
+    color: rgba(255,255,255,0.8);
+}
+
+.game-status {
+    grid-column: 1 / -1;
+}
+
+.status-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.status-card h4 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.status-card p {
+    color: rgba(255,255,255,0.8);
+}
+
+.players-section {
+    grid-column: 1 / -1;
+}
+
+.game-players {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.game-player {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+}
+
+.game-player.is-you {
+    border-color: #2196F3;
+    background: rgba(33,150,243,0.1);
+}
+
+.game-player-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin: 0 auto 10px;
+}
+
+.game-player-name {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.game-player-role {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+}
+
+.game-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Rules Screen Styles */
+.rules-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.rule-section {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.rule-section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.role-hierarchy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hierarchy-item {
+    display: grid;
+    grid-template-columns: 60px 120px 1fr;
+    gap: 15px;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+.rank {
+    font-weight: 600;
+    color: #FFD700;
+    text-align: center;
+}
+
+.role {
+    font-weight: 600;
+    color: #fff;
+}
+
+.description {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+}
+
+.rule-section ol,
+.rule-section ul {
+    color: rgba(255,255,255,0.9);
+    padding-left: 20px;
+}
+
+.rule-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Connection Status */
+.connection-status {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    z-index: 1000;
+}
+
+.connection-status.connected {
+    background: rgba(76,175,80,0.8);
+}
+
+.connection-status.disconnected {
+    background: rgba(244,67,54,0.8);
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 300px;
+    animation: slideInDown 0.3s ease-out;
+}
+
+.toast.success {
+    background: rgba(76,175,80,0.9);
+}
+
+.toast.error {
+    background: rgba(244,67,54,0.9);
+}
+
+.toast.warning {
+    background: rgba(255,152,0,0.9);
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Round Info Styling */
+.round-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.room-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.room-details p {
+    margin: 5px 0;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Player Names Section */
+.player-names-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.player-names-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#playerNameInputs {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.player-name-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease;
+}
+
+.player-name-input:focus-within {
+    border-color: #007bff;
+}
+
+.player-name-input label {
+    font-weight: 600;
+    color: #333;
+    min-width: 80px;
+}
+
+.player-name-input input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Round Results Styling */
+.round-results, .final-results {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.round-results h4, .final-results h4 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.score-item.winner {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-left-color: #ff6b35;
+    font-weight: 600;
+}
+
+.score-item .player-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.score-item .player-score {
+    background: #007bff;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.score-item.winner .player-score {
+    background: #ff6b35;
+}
+
+/* Mantri Guessing Section */
+.mantri-guessing-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #007bff;
+}
+
+.mantri-guessing-section h4 {
+    color: #007bff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.player-selection-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.player-selection-btn {
+    padding: 15px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-weight: 600;
+}
+
+.player-selection-btn:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-2px);
+}
+
+.player-selection-btn.selected {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* Raja Decision Section */
+.raja-decision-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #ffc107;
+}
+
+.raja-decision-section h4 {
+    color: #ffc107;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.decision-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.decision-info p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.decision-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.decision-buttons .btn {
+    flex: 1;
+    max-width: 200px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Score Display Enhancements */
+.score-display {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.score-display h4 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.current-scores {
+    display: grid;
+    gap: 10px;
+}
+
+.current-score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.current-score-item.leader {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-left-color: #ff6b35;
+    font-weight: 600;
+}
+
+.current-score-item .player-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.current-score-item .player-score {
+    background: #007bff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.current-score-item.leader .player-score {
+    background: #ff6b35;
+}
+
+/* Footer Styles */
+.game-footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 0;
+    margin-top: 40px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 10px;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.footer-links span {
+    opacity: 0.6;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: white;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 30px;
+    color: white;
+    line-height: 1.6;
+}
+
+.modal-body h3 {
+    color: #ffd700;
+    margin: 20px 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-body p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.modal-body ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.modal-body li {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+}
+
+.modal-footer .btn {
+    background: #ff6b35;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-footer .btn:hover {
+    background: #e55a2b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+}
+
+/* Mobile-First Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .menu-options {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+    
+    .game-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .info-card {
+        padding: 15px;
+    }
+    
+    .form-container {
+        margin: 0 10px;
+        padding: 20px;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+    
+    .game-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 0.9rem;
+    }
+    
+    .role-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .role-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .role-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .waiting-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .game-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .players-container {
+        gap: 8px;
+    }
+    
+    .player-item {
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    
+    .player-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .game-players {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+    }
+    
+    .game-player {
+        padding: 12px;
+    }
+    
+    .game-player-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .hierarchy-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 5px;
+        padding: 12px;
+    }
+    
+    .rank {
+        font-size: 0.9rem;
+    }
+    
+    .role {
+        font-size: 1rem;
+    }
+    
+    .description {
+        font-size: 0.8rem;
+    }
+    
+    .rule-section {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .rule-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    .connection-status {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        border-radius: 15px;
+    }
+    
+    .toast {
+        min-width: 280px;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .toast-container {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Touch-friendly improvements */
+    .btn {
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    .form-group input,
+    .form-group select {
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+    
+    /* Better spacing for mobile */
+    .screen {
+        padding-bottom: 20px;
+    }
+    
+    .header {
+        margin-bottom: 20px;
+    }
+    
+    .players-list {
+        margin: 15px 0;
+        padding: 15px;
+    }
+    
+    .status-card {
+        padding: 15px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 5px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .form-container {
+        margin: 0 5px;
+        padding: 15px;
+    }
+    
+    .btn {
+        padding: 12px 16px;
+        font-size: 1rem;
+    }
+    
+    .game-players {
+        grid-template-columns: 1fr;
+    }
+    
+    .role-card {
+        padding: 15px;
+    }
+    
+    .rule-section {
+        padding: 15px;
+    }
+}
+
+/* Landscape orientation for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .game-content {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .role-section {
+        grid-column: 1 / -1;
+    }
+    
+    .game-status {
+        grid-column: 1;
+    }
+    
+    .players-section {
+        grid-column: 2;
+    }
+}
+
+/* Scores Display */
+.scores-display {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+}
+
+.scores-display h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.scores-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.score-item .player-name {
+    font-weight: bold;
+}
+
+.score-item .score-value {
+    background: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+/* Guess Result Summary */
+.guess-result-summary {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin: 20px 0;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.guess-result-header {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.guess-result-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.guess-result-content {
+    padding: 20px;
+}
+
+.guess-details {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.guess-details p {
+    color: #fff;
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.guess-details strong {
+    color: #FFD700;
+}
+
+.revealed-roles h4 {
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.role-reveal-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.role-reveal-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.role-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.role-details {
+    flex: 1;
+}
+
+.role-details .player-name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.role-details .role-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Responsive adjustments for guess result */
+@media (max-width: 768px) {
+    .roles-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .role-reveal-item {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .role-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .guess-result-content {
+        padding: 15px;
+    }
+    
+    .guess-details {
+        padding: 12px;
+    }
+}
+
+/* Chat Section */
+.chat-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.chat-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-header h4 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.chat-container {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.chat-container.collapsed {
+    display: none;
+}
+
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.chat-message.own-message {
+    background: rgba(76, 175, 80, 0.3);
+    margin-left: auto;
+    text-align: right;
+}
+
+.chat-message.other-message {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.chat-message.system-message {
+    background: rgba(255, 193, 7, 0.2);
+    text-align: center;
+    font-style: italic;
+    max-width: 100%;
+}
+
+.chat-message .message-sender {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.chat-message.own-message .message-sender {
+    color: #4CAF50;
+}
+
+.chat-message.other-message .message-sender {
+    color: #FFD700;
+}
+
+.chat-message.system-message .message-sender {
+    color: #FFC107;
+}
+
+.chat-message .message-text {
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.chat-message .message-time {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 4px;
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    gap: 10px;
+}
+
+.chat-input-container input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.chat-input-container input:focus {
+    border-color: #4CAF50;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.chat-input-container input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chat-input-container button {
+    padding: 10px 15px;
+    border-radius: 50%;
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Chat responsive design */
+@media (max-width: 768px) {
+    .chat-messages {
+        height: 150px;
+        padding: 10px;
+    }
+    
+    .chat-message {
+        max-width: 90%;
+        padding: 6px 10px;
+    }
+    
+    .chat-input-container {
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .chat-input-container input {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .chat-input-container button {
+        min-width: 40px;
+        height: 40px;
+    }
+}
+
+/* Game End Results */
+.game-end-results {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin: 20px 0;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.game-end-header {
+    padding: 25px;
+    text-align: center;
+    color: white;
+}
+
+.game-end-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.game-end-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.game-end-content {
+    padding: 25px;
+}
+
+.final-scores h4 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.leaderboard-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.leaderboard-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.leaderboard-item.winner {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3));
+    border: 2px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.rank {
+    font-size: 2rem;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: center;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-info .player-name {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.player-info .total-score {
+    color: #FFD700;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.game-end-actions {
+    text-align: center;
+}
+
+.game-end-actions .btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+}
+
+/* Responsive game end results */
+@media (max-width: 768px) {
+    .game-end-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .game-end-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .game-end-content {
+        padding: 20px;
+    }
+    
+    .leaderboard-item {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .rank {
+        font-size: 1.5rem;
+        min-width: 50px;
+    }
+    
+    .player-info .player-name {
+        font-size: 1.1rem;
+    }
+}
+
+/* Ad Spaces Styles */
+.ad-space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.ad-space:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.ad-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ad-placeholder i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.ad-placeholder span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Ad Space Types */
+.ad-banner-top {
+    height: 90px;
+    width: 100%;
+    max-width: 728px;
+    margin: 0 auto 20px auto;
+}
+
+.ad-banner-bottom {
+    height: 90px;
+    width: 100%;
+    max-width: 728px;
+    margin: 20px auto 0 auto;
+}
+
+.ad-sidebar {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 600px;
+    z-index: 1000;
+    display: none; /* Hidden on mobile */
+}
+
+/* Show sidebar ad on desktop */
+@media (min-width: 1200px) {
+    .ad-sidebar {
+        display: flex;
+    }
+}
+
+.ad-sidebar .ad-placeholder {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 30px 15px;
+}
+
+.ad-sidebar .ad-placeholder i {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.ad-sidebar .ad-placeholder span {
+    font-size: 11px;
+}
+
+/* Host Controls Styles */
+.host-controls {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.host-controls h3 {
+    color: #856404;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.host-settings {
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.host-settings .form-group {
+    margin: 0;
+    min-width: 150px;
+}
+
+.host-settings label {
+    font-weight: 600;
+    color: #856404;
+    margin-bottom: 5px;
+}
+
+.host-settings select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #ffc107;
+    border-radius: 5px;
+    background: white;
+    color: #333;
+    font-size: 14px;
+}
+
+.host-settings select:focus {
+    outline: none;
+    border-color: #ff8c00;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
+}
+
+/* Play Again Screen */
+.play-again-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.play-again-section h3 {
+    margin: 0 0 15px 0;
+    color: #4a5568;
+    font-size: 1.2em;
+}
+
+.player-management {
+    margin-top: 15px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+.play-again-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.current-player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 5px 0;
+}
+
+.current-player-item .player-name {
+    font-weight: bold;
+}
+
+.current-player-item .remove-btn {
+    background: #e53e3e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.current-player-item .remove-btn:hover {
+    background: #c53030;
+}
+
+/* Room Code Display */
+.room-code-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.room-code-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #4a5568;
+    letter-spacing: 2px;
+}
+
+.room-code-help {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0 0 0;
+    font-style: italic;
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+    /* Smaller buttons for mobile */
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        margin: 5px;
+    }
+    
+    .btn-small {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    /* Host controls mobile */
+    .host-controls {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .host-settings {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .host-settings .form-group {
+        min-width: auto;
+    }
+    
+    /* Ad spaces mobile */
+    .ad-banner-top,
+    .ad-banner-bottom {
+        height: 60px;
+        margin: 10px 0;
+    }
+    
+    .ad-sidebar {
+        display: none; /* Hide sidebar ads on mobile */
+    }
+    
+    .ad-placeholder {
+        padding: 15px;
+        font-size: 12px;
+    }
+    
+    .ad-placeholder i {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    
+    .ad-placeholder span {
+        font-size: 10px;
+    }
+    
+    /* Smaller game elements */
+    .player-selection-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin: 3px;
+    }
+    
+    .mantri-guessing-section {
+        padding: 15px;
+    }
+    
+    .mantri-guessing-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    /* Compact game header */
+    .game-header {
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .game-info {
+        font-size: 0.9rem;
+    }
+    
+    .round-info {
+        font-size: 0.9rem;
+    }
+    
+    /* Smaller role cards */
+    .role-card {
+        padding: 15px;
+        margin: 10px 0;
+    }
+    
+    .role-card h2 {
+        font-size: 1.3rem;
+    }
+    
+    .role-card p {
+        font-size: 0.9rem;
+    }
+    
+    /* Compact player list */
+    .players-container {
+        gap: 8px;
+    }
+    
+    .player-item {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    
+    /* Smaller chat section */
+    .chat-section {
+        max-height: 200px;
+    }
+    
+    .chat-message {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    
+    /* Compact form elements */
+    .form-group {
+        margin: 10px 0;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Smaller cards */
+    .card {
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    .card h2 {
+        font-size: 1.4rem;
+    }
+    
+    /* Compact play again screen */
+    .play-again-section {
+        margin: 15px 0;
+        padding: 12px;
+    }
+    
+    .play-again-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .play-again-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .play-again-actions .btn {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    /* Room code display mobile */
+    .room-code-display {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .room-code-text {
+        font-size: 1.2rem;
+        padding: 8px 12px;
+    }
+    
+    /* Game end results mobile */
+    .game-end-results {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .game-end-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .game-end-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .leaderboard-item {
+        padding: 12px;
+    }
+    
+    .rank {
+        font-size: 1.5rem;
+        min-width: 50px;
+    }
+    
+    .player-info .player-name {
+        font-size: 1rem;
+    }
+    
+    .player-info .total-score {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .player-selection-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .role-card {
+        padding: 12px;
+    }
+    
+    .role-card h2 {
+        font-size: 1.2rem;
+    }
+    
+    .game-header {
+        padding: 8px;
+    }
+    
+    .game-info {
+        font-size: 0.8rem;
+    }
+    
+    .round-info {
+        font-size: 0.8rem;
+    }
+    
+    .room-code-text {
+        font-size: 1rem;
+        padding: 6px 10px;
+    }
+}
