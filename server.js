@@ -14,6 +14,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 const cors = require('cors');
+const fs = require('fs');
 
 const app = express();
 const server = http.createServer(app);
@@ -60,9 +61,23 @@ app.use((req, res, next) => {
     next();
 });
 
+// Debug endpoint
+app.get('/debug', (req, res) => {
+    res.json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        files: fs.readdirSync(__dirname),
+        indexExists: fs.existsSync(path.join(__dirname, 'index.html'))
+    });
+});
+
 // Serve the main HTML file for root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    console.log('Root route accessed, serving index.html');
+    const indexPath = path.join(__dirname, 'index.html');
+    console.log('Index path:', indexPath);
+    console.log('File exists:', fs.existsSync(indexPath));
+    res.sendFile(indexPath);
 });
 
 // Game state management
