@@ -25,8 +25,17 @@ class GameManager {
         this.players = [];
         this.maxPlayers = 3;
         
+        // Mobile detection
+        this.isMobile = this.detectMobile();
+        this.connectionRetries = 0;
+        this.maxRetries = 3;
+        
         this.initializeEventListeners();
         this.connectToServer();
+    }
+    
+    detectMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
     
     initializeEventListeners() {
@@ -105,16 +114,75 @@ class GameManager {
     }
     
     connectToServer() {
-        this.socket = io();
+        // Enhanced Socket.IO connection for mobile compatibility
+        this.socket = io({
+            transports: ['websocket', 'polling'],
+            upgrade: true,
+            rememberUpgrade: true,
+            timeout: 20000,
+            forceNew: true,
+            reconnection: true,
+            reconnectionDelay: 1000,
+            reconnectionAttempts: 5,
+            maxReconnectionAttempts: 5
+        });
         
         this.socket.on('connect', () => {
+            console.log('Connected to server:', this.socket.id);
             this.updateConnectionStatus('connected', 'Connected');
         });
         
-        this.socket.on('disconnect', () => {
+        this.socket.on('disconnect', (reason) => {
+            console.log('Disconnected from server:', reason);
             this.updateConnectionStatus('disconnected', 'Disconnected');
         });
         
+        this.socket.on('connect_error', (error) => {
+            console.error('Connection error:', error);
+            this.updateConnectionStatus('error', 'Connection Error');
+        });
+        
+        this.socket.on('reconnect', (attemptNumber) => {
+            console.log('Reconnected after', attemptNumber, 'attempts');
+            this.updateConnectionStatus('connected', 'Reconnected');
+        });
+        
+        this.socket.on('reconnect_error', (error) => {
+            console.error('Reconnection error:', error);
+            this.updateConnectionStatus('error', 'Reconnection Failed');
+            this.handleConnectionError();
+        });
+        
+        // Add connection timeout handling
+        setTimeout(() => {
+            if (!this.socket.connected) {
+                console.log('Connection timeout, attempting retry...');
+                this.handleConnectionError();
+            }
+        }, 10000);
+        
+        // Initialize all socket listeners
+        this.initializeSocketListeners();
+    }
+    
+    handleConnectionError() {
+        this.connectionRetries++;
+        if (this.connectionRetries <= this.maxRetries) {
+            console.log(`Retrying connection (${this.connectionRetries}/${this.maxRetries})...`);
+            this.updateConnectionStatus('retrying', `Retrying... (${this.connectionRetries}/${this.maxRetries})`);
+            
+            setTimeout(() => {
+                this.connectToServer();
+            }, 2000 * this.connectionRetries); // Exponential backoff
+        } else {
+            console.error('Max connection retries reached');
+            this.updateConnectionStatus('error', 'Connection Failed');
+            this.showToast('Connection failed. Please check your internet connection and try refreshing the page.', 'error');
+        }
+    }
+    
+    // Add all the socket event listeners
+    initializeSocketListeners() {
         this.socket.on('roomCreated', (data) => {
             this.roomCode = data.roomCode;
             this.isHost = true;
